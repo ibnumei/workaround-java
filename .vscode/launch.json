@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-WorkaroundApplication<workaround>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.playground.workaround.WorkaroundApplication",
+            "projectName": "workaround",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

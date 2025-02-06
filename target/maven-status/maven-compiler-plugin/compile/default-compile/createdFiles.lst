@@ -1,0 +1,7 @@
+com/playground/workaround/repository/DepartmentRepository.class
+com/playground/workaround/entity/Department.class
+com/playground/workaround/service/impl/DepartmentServiceImpl.class
+com/playground/workaround/controller/DepartmentController.class
+com/playground/workaround/WorkaroundApplication.class
+com/playground/workaround/service/DepartmentService.class
+com/playground/workaround/entity/Department$DepartmentBuilder.class
