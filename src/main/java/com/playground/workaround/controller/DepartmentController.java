@@ -4,8 +4,9 @@ import com.playground.workaround.entity.Department;
 import com.playground.workaround.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 
 // Class
 public class DepartmentController {
+    private static final Logger logger = LogManager.getLogger(DepartmentController.class);
 
     @Autowired
     private DepartmentService departmentService;
@@ -24,7 +26,13 @@ public class DepartmentController {
     public Department saveDepartment(
             @Valid @RequestBody Department department)
     {
-        return departmentService.saveDepartment(department);
+        try {
+            logger.info("save department with: {}", department);
+            return departmentService.saveDepartment(department);
+        } catch (Exception e) {
+            logger.error("error save department with message:, casuse: ", e.getMessage(), e.getStackTrace());
+            throw e;
+        }
     }
 
     // Read operation

@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="INFO">
     <Properties>
         <Property name="log-path">logs</Property>
     </Properties>
     <Appenders>
-        <Console name="ConsoleAppender" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+
+        <!-- Logstash configuration -->
+        <!-- <Socket name="Logstash" host="localhost" port="5000" protocol="TCP">
+            <LogstashLayout dateTimeFormatPattern="yyyy-MM-dd'T'HH:mm:ss.SSSZZZ" />
+        </Socket> -->
+
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %C{1} %M %F %L - %msg%n"/>
         </Console>
+
         <RollingFile name="FileAppender" fileName="${log-path}/app.log"
                      filePattern="${log-path}/app-%d{yyyy-MM-dd}-%i.log">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %C{1} %M %F %L- %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
                 <SizeBasedTriggeringPolicy size="10 MB"/>
             </Policies>
         </RollingFile>
     </Appenders>
+
     <Loggers>
-        <Root level="info">
-            <AppenderRef ref="ConsoleAppender"/>
+
+        <!-- Logger untuk package tertentu -->
+        <Logger name="com.playground.workaround" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
             <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+            <!-- <AppenderRef ref="Logstash" /> -->
         </Root>
     </Loggers>
 </Configuration>
