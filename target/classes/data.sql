@@ -1,0 +1,1 @@
+INSERT INTO department (department_name, department_address, department_code) VALUES ('department-1', 'jl K.H aamiin', '001');
